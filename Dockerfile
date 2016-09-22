@@ -8,6 +8,19 @@
 
 FROM centos:centos7
 
+#Upload AIM files
+ADD aim/* /tmp/aim/
+
+#Run AIM tasks
+RUN unalias cp \
+    mkdir /tmp/aim \
+    mkdir /JavaBB \
+    cp /tmp/aim/aimparms.sample /var/tmp/aimparms \
+    rpm -i /tmp/aim/CARKaim-9.70.0.3.x86_64.rpm \
+    cp /tmp/aim/JavaBB/* /JavaBB/ \
+    yum install -y python-setuptools \
+    easy_install supervisor
+
 # Pull in important updates and then install ruby193
 RUN yum install -y --enablerepo=centosplus epel-release \
     gettext tar which ruby ruby-devel \
