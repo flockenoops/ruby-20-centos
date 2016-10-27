@@ -9,11 +9,11 @@
 FROM centos:centos7
 
 #Upload AIM files
-ADD aim/* /tmp/aim/
+RUN mkdir /tmp/aim
+ADD /root/provider/* /tmp/aim/
 
 #Run AIM tasks
 RUN unalias cp \
-    mkdir /tmp/aim \
     mkdir /JavaBB \
     cp /tmp/aim/aimparms.sample /var/tmp/aimparms \
     rpm -i /tmp/aim/CARKaim-9.70.0.3.x86_64.rpm \
